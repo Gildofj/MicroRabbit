@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
-using System.Text.Json.Serialization;
 
 namespace MicroRabbit.Infra.Bus
 {
@@ -113,15 +112,18 @@ namespace MicroRabbit.Infra.Bus
         {
             if (_handlers.ContainsKey(eventName))
             {
-                var subscriptions = _handlers[eventName];
-                foreach (var subscription in subscriptions)
+                using (var scope = _serviceScopeFactory.CreateScope())
                 {
-                    var handler = Activator.CreateInstance(subscription);
-                    if (handler == null) continue;
-                    var eventType = _eventTypes.SingleOrDefault(t => t.Name == eventName);
-                    var @event = JsonConvert.DeserializeObject(message, eventType);
-                    var conreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
-                    await (Task)conreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
+                    var subscriptions = _handlers[eventName];
+                    foreach (var subscription in subscriptions)
+                    {
+                        var handler = scope.ServiceProvider.GetService(subscription);
+                        if (handler == null) continue;
+                        var eventType = _eventTypes.SingleOrDefault(t => t.Name == eventName);
+                        var @event = JsonConvert.DeserializeObject(message, eventType);
+                        var conreteType = typeof(IEventHandler<>).MakeGenericType(eventType);
+                        await (Task)conreteType.GetMethod("Handle").Invoke(handler, new object[] { @event });
+                    }
                 }
             }
         }

@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MicroRabit.Domain.Core\MicroRabit.Domain.Core.csproj" />
+  </ItemGroup>
+
 </Project>
