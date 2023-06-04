@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "jK2UaDPkCyCIXbpPSQu67Y4M0EJonZVRYj7MWYHyID2tpYQSlzdTy5JJX9G15usRTCzTIQzzaO+OPHqYbcXqaA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\junio\\Projects\\MicroRabbit\\MicroRabit.Domain.Core\\MicroRabit.Domain.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\junio\\.nuget\\packages\\mediatr\\12.0.1\\mediatr.12.0.1.nupkg.sha512",
+    "C:\\Users\\junio\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\junio\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
